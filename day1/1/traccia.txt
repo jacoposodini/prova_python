@@ -1,0 +1,10 @@
+Realizzare un'applicazione che dato in input il path a un file di testo
+codificato in utf8 conti le occorrenze delle parole che vi appaiono
+e stampi su stdout le 10 più frequenti.
+
+Input: path a file di testo in formato utf8 (canto1.txt)
+Output: lista delle 10 parole più frequenti su stdout
+
+Definizioni:
+    - parola: sequenza di 3+ codepoint unicode delimitata da whitespace
+    - whitespace: spazi, tab, newline

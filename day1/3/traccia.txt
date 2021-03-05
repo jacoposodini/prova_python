@@ -1,0 +1,14 @@
+Creare un'applicazione che dato in input il path a una directory la
+percorra ricorsivamente in cerca di file di tipo audio, video, e
+immagini.
+
+La lista dei path ai file trovati dovrà essere stampata su stdout,
+con i file raggruppati per tipo.
+
+Input: path a una directory
+Output: lista di path a file di tipo audio, video, e immagine
+        raggruppati per tipo
+
+Suggerimenti:
+    - usare il modulo mimetypes
+    - usare il modulo os, in particolare la funzione walk()

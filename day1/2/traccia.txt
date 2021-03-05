@@ -1,0 +1,11 @@
+Realizzare un'applicazione che dati in input un path a file e una
+lista di path a file crei un archivio zip il cui path corrisponda
+al primo, e i cui file siano tutti quelli aggiuntivi specificati.
+
+In caso uno dei file in input non esista l'applicazione dovrà uscire,
+in caso il file di output esista l'applicazione dovrà chidere conferma
+prima di sovrascriverlo.
+
+Suggerimenti:
+    - usare il modulo `argparse`
+    - usare il modulo `zipfile`
