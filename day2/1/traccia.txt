@@ -1,0 +1,2 @@
+Dato bertos_access.log, stampare in output tutte le richieste aventi un codice di stato specificato attraverso argomento a linea di comando.
+Il programma dovrà stampare solo la data in format dd/mm/yyyy hh:mm, il referrer e la risorsa richiesta delle richieste che soddisfano i requisiti.
