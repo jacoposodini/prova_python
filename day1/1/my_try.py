@@ -3,7 +3,7 @@ from collections import defaultdict
 
 def word_list(f):
     
-    d=defaultdict(int)
+    d = defaultdict(int)
     
     lines=f.readlines()
     for line in lines:        
