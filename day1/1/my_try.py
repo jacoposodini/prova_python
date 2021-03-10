@@ -9,7 +9,7 @@ def word_list(f):
     for line in lines:        
         for i in line.split():
             
-            if len(i)<3:
+            if len(i) < 3:
                 continue
             
             d[i] += 1
@@ -23,14 +23,15 @@ if __name__ == "__main__":
     args=parser.parse_args()
     
     try:
-        f = open(args.path)
+        with open(args.path, 'r') as f:
+            d = word_list(f)
+        
     except IOError:
         print("Can't load file",args.path)
         exit(1)
     
-    d=word_list(f)
-        
-    #qui ho copiato.. non ho capito d.get, mi verrebbe da dire d.get(i) ma non funziona
+    
+
     for i in sorted(d, key=d.get, reverse=True)[:10]:
         print(f"Occurences: {d[i]},{i}")
         
