@@ -5,7 +5,7 @@ def word_list(f):
     
     d = defaultdict(int)
     
-    lines=f.readlines()
+    lines = f.readlines()
     for line in lines:        
         for i in line.split():
             
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     
     #argomento obbligatorio.. come fare quello facoltativo?
     parser.add_argument('path', help='file path to be read')
-    args=parser.parse_args()
+    args = parser.parse_args()
     
     try:
         with open(args.path, 'r') as f:
