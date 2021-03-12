@@ -9,11 +9,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with s:
         while True:
             cmd = input('>')
-            cmd = str.encode(cmd)
-            s.sendall(cmd)
-            data = s.recv(1024)
+            if cmd != '':
+                cmd = str.encode(cmd)
+                s.sendall(cmd)
+                data = s.recv(1024)
 
-            if data == b"quit":
-                break
+                if data == b"quit":
+                    break
+                else:
+                    print('######Received######\n', data.decode('utf-8'))
             else:
-                print('######Received######\n', data.decode('utf-8'))
+                continue
