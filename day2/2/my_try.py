@@ -19,7 +19,7 @@ URLS = {
 }
 
 def test_site(URLS):
-    tested=[]
+    tested = []
     for i in URLS:
         online = ConnectionStatus.OFFLINE
         try:            
@@ -59,9 +59,9 @@ def make_XML(sites,destination):
                 turl.text = url            
                 tdetails = ET.SubElement(ttest,'details')
                 tconn = ET.SubElement(tdetails, 'connectiontest')
-                tconn.text = 'success' if status == ConnectionStatus.ONLINE else 'fail'
+                tconn.text = 'success' if status == ConnectionStatus.ONLINE or status == ConnectionStatus.TIMEOUT else 'fail'
             
-                if status == ConnectionStatus.ONLINE:                    
+                if status == ConnectionStatus.ONLINE or status == ConnectionStatus.TIMEOUT:                    
                     ttimetest = ET.SubElement(tdetails, 'timetest', {'elapsed': '{:.2f}'.format(rx_time*1000), 'maxtime': '{:.2f}'.format(max_time)})                    
                     ttimetest.text = 'success' if status is not ConnectionStatus.TIMEOUT else 'failed'
                     
@@ -84,7 +84,6 @@ def main():
         print ("{:40} {:.3f} {} \t\t{}".format(url,rx_time,status,response))
         
     if args.x:
-        #print (args.x)
         XML = make_XML(tested, args.x)  
 
 
