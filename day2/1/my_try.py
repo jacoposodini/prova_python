@@ -1,6 +1,7 @@
 import re
 import argparse
 from datetime import datetime
+from collections import namedtuple
 
 REG = re.compile(
     '(?:\d{1,3}\.){3}\d{1,3}'  # the ip
@@ -13,13 +14,15 @@ REG = re.compile(
 def get_errors(path,err):
     
     log = []
+    Log = namedtuple('Log_list',['date','referrer','resource'])    
     
     with open(path) as f:
         for line in f.readlines():
             l = REG.search(line)            
             if l is not None and l.group('status_code') == err:                
                 date = datetime.strptime(l.group('date'), '%d/%b/%Y:%H:%M:%S')
-                log.append((date,l.group('referrer'),l.group('resource')))
+                elem = Log(date, l.group('referrer'),l.group('resource'))
+                log.append(elem)
     return log
             
     
