@@ -4,7 +4,9 @@ import subprocess
 HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
 PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-commands = {b'list':b'ls', b'concat':b'cat', b'print':b'echo'}
+#commands is a dict in this form: {SERVER_COMMAND:[LINUX_COMMAND,MIN_PARAM]}
+
+commands = {b'list':[b'ls',0], b'concat':[b'cat',1], b'print':[b'echo',0]}
 help_str = b"A simple server that map the following commands to the equivalent linux version:\n\
             list --> ls\n\
             concat --> cat\n\
@@ -33,11 +35,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 
                 if cmd == b'help':
                     conn.sendall(help_str)
-            
                 elif cmd in commands:
-                    command = [commands[cmd]]+cmd_split[1:]
-                    cmd_return_string = subprocess.run(command, stdout=subprocess.PIPE)      
-                    conn.sendall(cmd_return_string.stdout)
+                    if commands[cmd][1] <= len(cmd_split) - 1: #are there enought parameters?
+                        command = [commands[cmd][0]] + cmd_split[1:]
+                        cmd_return = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        
+                        if cmd_return.returncode != 0:
+                            conn.sendall(b"Non zero return code while executing server command. MSG:\n" + cmd_return.stderr)
+                        else:                   
+                            conn.sendall(cmd_return.stdout)
+                    else:
+                        conn.sendall(b"Not enought parameters")
                 elif data == b"quit":
                     conn.sendall(data)                
                     break
