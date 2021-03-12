@@ -20,7 +20,7 @@ if __name__ == "__main__":
     parser.add_argument('zipfile', help='destination zip file')
     parser.add_argument('srcfile', help='files to be zipped', nargs='+')
     
-    args=parser.parse_args()
+    args = parser.parse_args()
     
     print(args)
     print(args.srcfile)
@@ -30,14 +30,14 @@ if __name__ == "__main__":
             print (f"file {i} does not exist")
             exit(1)
     
-    overwrite=''
+    overwrite = ''
     if os.path.isfile(args.zipfile):
         while (overwrite != 'Y' and overwrite != 'N'):
             print(f"File {args.zipfile} already exists, overwrite? [Y,N]")
             overwrite = input()
             overwrite = overwrite.upper()
     
-    if overwrite=='N':
+    if overwrite == 'N':
         exit(0)
     else:
         zip_all(args.zipfile,args.srcfile)

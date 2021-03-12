@@ -4,9 +4,9 @@ from collections import Counter
 def word_list(f):
     
     #cnt = Counter()
-    words=[]
+    words = []
     
-    lines=f.readlines()
+    lines = f.readlines()
     for line in lines:        
         for i in line.split():
             
