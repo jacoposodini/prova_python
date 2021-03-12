@@ -35,7 +35,7 @@ def main():
     
     parser.add_argument('path', help='log to be read')
     parser.add_argument('err_code', help='error code')
-    args=parser.parse_args()
+    args = parser.parse_args()
     
     log = get_errors(args.path,args.err_code)
     
