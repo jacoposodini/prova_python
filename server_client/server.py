@@ -8,7 +8,8 @@ commands = {b'list':b'ls', b'concat':b'cat', b'print':b'echo'}
 help_str = b"A simple server that map the following commands to the equivalent linux version:\n\
             list --> ls\n\
             concat --> cat\n\
-            print --> echo"
+            print --> echo\
+            \n\n\"quit\" terminate the connection"
 
 #list_files = subprocess.run(["ls"], stdout=subprocess.PIPE)
 
@@ -32,8 +33,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 cmd = cmd_split[0]
             
                 #conn.sendall(data) #echo
+                
+                if cmd == b'help':
+                    conn.sendall(help_str)
             
-                if cmd in commands:
+                elif cmd in commands:
                     command = [commands[cmd]]+cmd_split[1:]
                     cmd_return_string = subprocess.run(command, stdout=subprocess.PIPE)      
                     conn.sendall(cmd_return_string.stdout)
@@ -41,6 +45,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     conn.sendall(data)                
                     break
                 else:
-                    conn.sendall(help_str)
+                    conn.sendall(b"Can't recognize the command! Try help")
                     
             
