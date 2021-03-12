@@ -11,11 +11,8 @@ help_str = b"A simple server that map the following commands to the equivalent l
             print --> echo\
             \n\n\"quit\" terminate the connection"
 
-#list_files = subprocess.run(["ls"], stdout=subprocess.PIPE)
-
-
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #per evitare il lock della porta
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #to avoid lock of the port
     s.bind((HOST, PORT))
     s.listen()
     conn, addr = s.accept()
