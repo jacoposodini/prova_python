@@ -17,7 +17,7 @@ def get_errors(path,err):
     with open(path) as f:
         for line in f.readlines():
             l = REG.search(line)            
-            if l!= None and l.group('status_code') == err:                
+            if l is not None and l.group('status_code') == err:                
                 date = datetime.strptime(l.group('date'), '%d/%b/%Y:%H:%M:%S')
                 log.append((date,l.group('referrer'),l.group('resource')))
     return log
