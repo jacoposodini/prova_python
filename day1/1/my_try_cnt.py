@@ -6,14 +6,16 @@ def word_list(f):
     #cnt = Counter()
     words = []
     
-    lines = f.readlines()
-    for line in lines:        
-        for i in line.split():
+    #lines = f.readlines()
+    #for line in lines:        
+        #for i in line.split():
             
-            if len(i) < 3:
-                continue
+            #if len(i) < 3:
+                #continue
+
+    words = [i for line in f.readlines() for i in line.split() if len(i) >=3]
             
-            words.append(i)
+    #words.append(i)
             #cnt[i] += 1
             
     cnt = Counter(words)
