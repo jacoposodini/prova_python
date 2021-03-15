@@ -19,7 +19,7 @@ def main():
         exit(1)
     
     cur = con.cursor()
-    cur.execute("CREATE TABLE words (word TEXT)")
+    cur.execute("CREATE TABLE words (word STRING)")
     
     try:
         with open(args.path, mode='r', encoding='utf-8') as f:
@@ -37,7 +37,7 @@ def populate_db(f,cur):
             if len(i)<3:
                 continue
             
-            cur.execute("INSERT INTO words VALUES('{}')".format(i))
+            cur.execute("INSERT INTO words VALUES(?)",(i,))
 
 
 def show_db(cur, limit):
