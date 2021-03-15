@@ -18,5 +18,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                     break
                 else:
                     print('######Received######\n', data.decode('utf-8'))
-            else:
-                continue
